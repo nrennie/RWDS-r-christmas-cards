@@ -1,4 +1,11 @@
-# Real World Data Science Template 👨🏼‍💻
+# Creating Christmas Cards in R
+
+This post was inspired by the "Making Christmas Cards in R" session that I ran for Oxford R User Group.
+
+## Real World Data Science Template 👨🏼💻
+
+This post was created using the [Real World Data Science Template](https://github.com/finnoh/RWDS_post_template).
+
 Files and stylesheets to help contributors create content for [Real World Data Science](https://realworlddatascience.net/), a new data science publication from the [Royal Statistical Society](https://rss.org.uk/).
 
 - `content-brief.qmd` is the recommended starting point. Use this Quarto document to describe your proposed article, render and [share it](https://realworlddatascience.net/contact.html) with the Real World Data Science (RWDS) editorial board for review. 
