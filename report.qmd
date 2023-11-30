@@ -1,12 +1,12 @@
 ---
-title: How to create an article for Real World Data Science
+title: Creating Christmas Cards with R
 description: |
   A template to help contributors style their articles and make use of different Quarto features.
 categories:
   - Resources
   - for
   - Contributors
-author: Author1, Author2
+author: Nicola Rennie
 date: last-modified
 date-format: long
 toc: true
@@ -33,283 +33,459 @@ execute:
 nocite: '@*'
 page-layout: article
 title-block-banner: true
-# citation: true
----
-This is a template for writing Real World Data Science (RWDS) articles in [`Quarto`](https://quarto.org). Please insert graphs and tables as static objects, i.e. `.png` files or markdown tables, rather than generating them by code, as it otherwise takes too long to render the full RWDS website.
-
-One idea for a workflow could be to write your analysis and text directly in the `report.qmd` file, execute your code cells in your local terminal, save figures into the images folder, and import them as files in the `report.qmd`.
-
-<!-- TODO: What about creating the files once and freezing them? Is there a more elegant way? -->
-
-For the content of your writing, make sure to check out the resources on [RWDS---Call for Contributions](https://realworlddatascience.net/contributor-docs/call-for-contributions.html).
-
-## A main section about writing text
-
-Notice how the headings and their hierarchy also show up in the table of contents on the right-hand side.
-
-When writing, use **bold**, *italics*, and ~~strikethrough~~ text for emphasis, but use sparingly.
-
-<!-- You can also write comments for yourself, which won't show up in the rendered documents. However, be aware that these comments will be displayed in the online source code in the RWDS repository, so don't share any secrets here! -->
-
-In this subsection, we will show how to create lists and blockquotes:
-
-1. First item
-2. Second item
-
-- Item A
-- Item B
-  - Subitem B1
-
-> You can make profound statements in a blockquote.
-
-You can add a footnote to your writing.^[In case you want to give an extra reference or link to a source.]
-
-By adding your references as BibTeX to the `references.bib` file in this repository, you not only maintain your references in the right citation style, but you can also cite directly, as recommended by @example-bibtexkey, or indirectly [see @example-bibtexkey].
-
-By writing `---` you can add a horizontal line separator.
-
 ---
 
-If your article includes tips on special keyboard shortcuts, you can typeset them like this: *To print, press* {{< kbd Shift-Ctrl-P >}}. *To open an existing new project, press* {{< kbd mac=Shift-Command-O win=Shift-Control-O linux=Shift-Ctrl-L >}}.
+# Christmas in R {background-color="#2F4F4F"}
 
-You can write equations in-line like this $y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \epsilon \text{, }$ or in a separate block like this:
-$$
-y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \epsilon \text{. }
-$$ {#eq-first}
+## {christmas}
 
-@eq-first is an example of a reference to an equation.
-
-::: {.callout-note appearance="simple"}
-For more information on **cross-references**, see the [Quarto documentation](https://quarto.org/docs/authoring/cross-references.html#equations).
-:::
-
-### Sub-section: Creating tables
-
-Adding a table in markdown is easy, but can result in some formatting work. Consider using a tool like [tablesgenerator](https://www.tablesgenerator.com/markdown_tables), or the [Visual Editor if you are using R Studio](https://quarto.org/docs/visual-editor/).
-
-| Column 1 | Column 2 | Column 3 |
-| -------- | -------- | -------- |
-| A        | B        | C        |
-| D        | E        | F        |
-: Example table with a caption. {#tbl-example}
-
-You can also reference great tables such as @tbl-example.
-
-If needed, you can also add sub-tables:
-
-::: {#tbl-panel layout-ncol=2}
-| Col1 | Col2 | Col3 |
-|------|------|------|
-| A    | B    | C    |
-| E    | F    | G    |
-| A    | G    | G    |
-
-: First Table. {#tbl-first}
-
-| Col1 | Col2 | Col3 |
-|------|------|------|
-| A    | B    | C    |
-| E    | F    | G    |
-| A    | G    | G    |
-
-: Second Table. {#tbl-second}
-
-Main Caption.
-:::
-
-See @tbl-panel for details, especially @tbl-second.
-
-::: {.callout-note appearance="simple"}
-For more information on **tables**, see the [Quarto documentation](https://quarto.org/docs/authoring/tables.html#grid-tables).
-:::
-
-## Another main section: Writing code
-
-Authoring technical articles may also include code chunks. You can add code chunks in `R` like this:
-
-``` {r}
-set_signif_par()
-plot(1:4, 1:4, col=1:4, pch=19, cex=3, xlab="", ylab="",
-     main = "My Significance Plot",
-     sub = "Source: data source")
-abline(h=1:4, v=1:4, col = "lightgrey")
-```
-
-We can write not only about `R`, but also about `Python`:
-
-``` {python}
-import pandas as pd
-print("Hello this is Python code")
-```
-
-or `Julia` (and many other languages):^[To render documents with embedded `Julia` code, follow the [installation instructions](https://quarto.org/docs/computations/julia.html#installation) on the Quarto website.]
-
-``` {{julia}}
-using Plots
-plot(sin, 
-     x->sin(2x), 
-     0, 
-     2π, 
-     leg=false, 
-     fill=(0,:lavender))
-```
-
-If you want to show how to write a specific code chunk in `Quarto`, you can use the `echo: fenced` option to show the code in the output. 
+::: columns 
+::: {.column}
 
 ```{r}
-#| echo: fenced
-# This is a fenced code block with some R code
-x <- 1:10
-y <- x^2
-plot(x, y)
+#| label: christmas
+#| echo: true
+#| eval: false
+library(christmas)
+xmasepitree(year = 2023)
 ```
 
-If you want to reference specific lines of code, set `code-line-numbers: true`. Even better, take a look at how to do [interactive code annotations](https://quarto.org/docs/authoring/code-annotation.html#annotation-syntax), as these are also supported on Real World Data Science. You can see an example here (try clicking on the numbers for the highlighting):
+:::
+
+::: {.column}
+
+![](images/epitree.png){fig-align="center" fig-alt="Christmas tree of statistical words" width=90%}
+
+:::
+:::
+
+## `snow` Quarto extension
+
+::: columns 
+::: {.column width="50%"}
+
+```bash
+quarto install extension emilhvitfeldt/quarto-snow
+```
+
+<br>
+
+GitHub: [github.com/EmilHvitfeldt/quarto-snow](https://github.com/EmilHvitfeldt/quarto-snow)
+
+:::
+
+::: {.column width="50%"}
+
+![](images/snow.gif){fig-align="center" fig-alt="Gif of falling snow against a set of slides" width=90%}
+
+:::
+:::
+
+# Let's build a snowman! {background-color="#2F4F4F"}
+
+## R packages we need
+
+::: columns 
+::: {.column}
+
+* {ggplot2}: for drawing plots
+* {ggforce}: for drawing circles
+* {sf}: for working with spatial data
+
+:::
+
+::: {.column}
 
 ```{r}
-#| code-line-numbers: true
-library(tidyverse)
-library(palmerpenguins)
-penguins |>                                      # <1>
-  mutate(                                        # <2>
-    bill_ratio = bill_depth_mm / bill_length_mm, # <2>
-    bill_area  = bill_depth_mm * bill_length_mm  # <2>
-  )                                              # <2>
-```
-1. Take `penguins`, and then,
-2. add new columns for the bill ratio and bill area.
-
-
-## Figures and their layout
-
-You can also add images:
-
-![](https://realworlddatascience.net/images/rwds-logo-150px.png)
-
-and resize them:
-
-![](https://realworlddatascience.net/images/rwds-logo-150px.png){width=10%}
-
-and reposition them:
-
-![](https://realworlddatascience.net/images/rwds-logo-150px.png){width=10% fig-align="center"}
-
-You can make use of Quarto's options to arrange multiple images in a grid, and link to both URLs and local files. Also, you can add captions to images that contain links. Local images should be stored in the folder `images` and in `.png` format.
-
-You can also cross-reference figures, such as @fig-layout, or subfigures like @fig-repo.
-
-::: {#fig-layout layout="[1,1,1]"}
-
-![[Data](https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2006&q=80)](https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2006&q=80){#fig-data}
-
-![[Laptop](https://images.unsplash.com/photo-1538688273852-e29027c0c176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80)](https://images.unsplash.com/photo-1538688273852-e29027c0c176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80){#fig-laptop}
-
-![[Cover of The Repo Newsletter](https://dsecon.substack.com)](images/repo_cover.png){#fig-repo}
-
-Caption for the full figure.
-
-:::
-
-Sometimes, you might want to add an image, graph, equation, table, or simple text in the margin of the page, to further substantiate a claim that you make. Here we put the RWDS logo in the margin.
-
-::: {.column-margin}
-![RWDS logo in the margin.](https://realworlddatascience.net/images/rwds-logo-150px.png)
-:::
-
-::: {.callout-note appearance="simple"}
-For more information on figures, see the [Quarto documentation](https://quarto.org/docs/authoring/figures.html).
-:::
-
-## Creating diagrams
-
-Rather than creating diagrams in Canva, Figma, or PowerPoint and pasting them into your article as an image, consider using [Mermaid](https://mermaid-js.github.io/mermaid/#/). Note how the chunk options for Mermaid start with `%%|` and that you need to set the option `eval: true` and `echo: false` to only generate your graph and not the code that created it. @fig-mermaid is an example of a reference to a diagram.
-
-```{mermaid}
-%%| eval: true
-%%| echo: false
-%%| fig-align: center
-%%| fig-cap: "This is a caption for the diagram."
-%%| label: fig-mermaid
-flowchart LR
-  A[Hard edge] --> B(Round edge)
-  B --> C{Decision}
-  C --> D[Result one]
-  C --> E[Result two]
+#| label: pkgs
+#| eval: false
+#| echo: true
+pkgs <- c("ggplot2", "ggforce", "sf")
+install.packages(pkgs)
 ```
 
-::: {.callout-note appearance="simple"}
-For more information on diagrams, see the [Quarto documentation](https://quarto.org/docs/authoring/diagrams.html).
+:::
 :::
 
-## Interactive elements
+## What makes a snowman?
 
-### Shiny
+::: {.incremental}
 
-We welcome the inclusion of interactive elements such as Shiny apps in RWDS articles. So far, the easiest way to implement these apps is to host them on your own and embed them in this article as an HTML iframe object.
+* Head and body
 
-One example workflow could be:
+* Buttons and eyes
 
-1. Create a Shiny app and host it on your server, e.g. on [shinyapps.io](https://www.shinyapps.io/) (free option).
-2. You can then embed the app in your article as an [HTML iframe](https://support.posit.co/hc/en-us/articles/217592607-Can-I-embed-iframe-Shiny-apps-in-other-websites-from-RStudio-Connect-).
+* Hat 
 
-The iframe could look like this (replace `www.your_shiny_dashboard` with the URL of your app):
+* Arms
 
-```{html}
- <iframe src="www.your_shiny_dashboard" style="border: none; width: 100%; height: 500px" frameborder="0"></iframe>
-```
+* Nose
 
-Paste this code directly into your `.qmd` file to implement the HTML iframe.
+* Sky
 
-You can find an example in the RWDS article, [Using 'basket complementarity' to make product recommendations](https://realworlddatascience.net/ideas/datasciencebites/posts/2023/03/02/basket-complementarity.html).
+* Snowflakes
 
-### webR
-The webR Quarto extension, from [James Balamuta](https://thecoatlessprofessor.com/about/), is very exciting. As Balamuta describes, webR is "designed to empower you to run R code directly in your web browser using familiar reporting tools, all without the need for an external R server."
+* Snow
 
-Visit the [quarto-webr website](https://quarto-webr.thecoatlessprofessor.com/) for details on how to make full use of this capability. And check out [a simple working example](https://realworlddatascience.net/viewpoints/editors-blog/posts/2023/09/19/positconf-blog.html#dynamic-interactions-empowering-educators-and-researchers-with-interactive-quarto-documents-using-webr) on RWDS.
-
-## Some icing on the cake
-
-You can add a warning to your writing like this:
-
-::: {.callout-warning appearance="simple"}
-This is a warning!
 :::
 
-If your remark is too benign for a warning, but still valuable information for the reader, consider a note:
+## What makes a snowman?
 
-::: {.callout-note appearance="simple"}
-Want to hear more from the RSS Data Science and AI Section? Sign up for its newsletter at [rssdsaisection.substack.com](https://rssdsaisection.substack.com/).
-:::
+* Head and body (circles with `geom_circle()`)
 
-To add more media to your article, consider embedding a video:
+* Buttons and eyes (points with `geom_point()`)
 
-{{< video https://www.youtube.com/embed/wo9vZccmqwc >}}
+* Hat (rectangles with `geom_rect()`)
 
-<!-- TODO: This leads to weird formatting of the rest of the article. Also: How does this work when hosted? -->
+* Arms (lines with `geom_segment()`)
 
-<!-- https://quarto.org/docs/interactive/shiny/ -->
+* Nose (polygon with `geom_sf()`)
 
-::: {.article-btn}
-[Back to section homepage](url)
-:::
+* Sky (styling with `theme()`)
 
-::: {.further-info}
-::: grid
-::: {.g-col-12 .g-col-md-12}
-About the author
-: Author 1 is... and Author 2 is...
-:::
-::: {.g-col-12 .g-col-md-6}
-Copyright and licence
-: &copy; 2023 Author 1 and Author 2
+* Snowflakes (points with `geom_point()`)
 
-<a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;"> <img style="height:22px!important;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a> This article is licensed under a Creative Commons Attribution 4.0 (CC BY 4.0) <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;"> International licence</a>. Thumbnail photo credit and licence goes here.
+* Snow (rectangle with `geom_rect()`)
   
+## Starting with the sky...
+
+```{r}
+#| label: snowman1
+#| eval: true
+#| echo: true
+#| output-location: column
+library(ggplot2)
+s1 <- ggplot() +
+  theme_void() +
+  theme(
+    plot.background = element_rect(
+      fill = "#0e1c2e"
+      )
+  )
+s1
+```
+
+## Add some snow...
+
+```{r}
+#| label: snowman2
+#| eval: true
+#| echo: true
+#| output-location: column
+s2 <- s1 +
+  annotate(
+    geom = "rect",
+    xmin = 0, xmax = 1,
+    ymin = 0, ymax = 0.2,
+    fill = "gray98",
+    colour = "gray98"
+  ) +
+  xlim(0, 1) +
+  ylim(0, 1) +
+  coord_fixed(expand = FALSE)
+s2
+```
+
+
+## ...and some snowflakes!
+
+```{r}
+#| label: snowman3
+#| eval: true
+#| echo: true
+#| output-location: column
+set.seed(20231225)
+n <- 100
+snowflakes <- data.frame(
+  x = runif(n),
+  y = runif(n)
+)
+s3 <- s2 +
+  geom_point(
+    data = snowflakes,
+    mapping = aes(
+      x = x,
+      y = y
+    ),
+    colour = "white",
+    pch = 8
+  )
+s3
+```
+
+## Build the snowman!
+
+```{r}
+#| label: snowman4
+#| eval: true
+#| echo: true
+#| output-location: column
+library(ggforce)
+s4 <- s3 +
+  geom_circle(
+    data = data.frame(
+      x0 = c(0.6, 0.6),
+      y0 = c(0.3, 0.5),
+      r = c(0.15, 0.1)
+    ),
+    mapping = aes(x0 = x0, y0 = y0, r = r),
+    fill = "white",
+    colour = "white"
+  )
+s4
+```
+
+## Add some rocks for buttons and eyes...
+
+```{r}
+#| label: snowman5
+#| eval: true
+#| echo: true
+#| output-location: column
+s5 <- s4 +
+  geom_point(
+    data = data.frame(
+      x = c(0.6, 0.6, 0.6, 0.57, 0.62),
+      y = c(0.25, 0.3, 0.35, 0.52, 0.52),
+      size = runif(5, 2, 4.5)
+    ),
+    mapping = aes(x = x, y = y, size = size)
+  ) +
+  scale_size_identity()
+s5
+```
+
+## ... and sticks for arms ...
+
+```{r}
+#| label: snowman6
+#| eval: true
+#| echo: true
+#| output-location: column
+s6 <- s5 + 
+  annotate(
+    geom = "segment",
+    x = 0.7, xend = 0.85, y = 0.3, yend = 0.4,
+    colour = "chocolate4",
+    linewidth = 2
+  ) +
+  annotate(
+    geom = "segment",
+    x = 0.46, xend = 0.33, y = 0.3, yend = 0.4,
+    colour = "chocolate4",
+    linewidth = 2
+  )
+s6
+```
+
+
+## and a hat!
+
+```{r}
+#| label: snowman7
+#| eval: true
+#| echo: true
+#| output-location: column
+s7 <- s6 +
+  annotate(
+    geom = "rect",
+    xmin = 0.46, xmax = 0.74,
+    ymin = 0.56, ymax = 0.6,
+    fill = "brown"
+  ) +
+  annotate(
+    geom = "rect",
+    xmin = 0.5, xmax = 0.7,
+    ymin = 0.56, ymax = 0.73,
+    fill = "brown"
+  )
+s7
+```
+
+## Create a carror for a nose with {sf}...
+
+```{r}
+#| label: carrot
+#| eval: true
+#| echo: true
+#| output-location: column
+library(sf)
+nose_pts <- matrix(
+  c(
+    0.6, 0.5,
+    0.65, 0.48,
+    0.6, 0.46,
+    0.6, 0.5
+  ),
+  ncol = 2,
+  byrow = TRUE
+)
+nose <- st_polygon(list(nose_pts))
+plot(nose)
+```
+
+## ... and add it to the snowman
+
+```{r}
+#| label: snowman8
+#| eval: true
+#| echo: true
+#| output-location: column
+s8 <- s7 +
+  geom_sf(
+    data = nose,
+    fill = "orange",
+    colour = "orange"
+  ) +
+  coord_sf(expand = FALSE)
+s8
+```
+
+## Finally add a Christmas message!
+
+```{r}
+#| label: snowman9
+#| eval: true
+#| echo: true
+#| output-location: column
+s9 <- s8 +
+  annotate(
+    geom = "text",
+    x = 0.5, y = 0.95,
+    label = "Merry Christmas",
+    colour = "red3",
+    fontface = "bold", size = 9
+  ) +
+  annotate(
+    geom = "text",
+    x = 0.5, y = 0.07,
+    label = "To ...\n From ...",
+    colour = "red3",
+    fontface = "bold", size = 5
+  )
+s9
+```
+
+# Sending Christmas cards in R {background-color="#2F4F4F"}
+
+## Email your Christmas card
+
+::: columns
+::: {.column}
+
+* {blastula}: a package for creating and sending HTML emails from R.
+
+* {gmailR}: a package for sending emails via the Gmail’s RESTful API.
+
+* {RDCOMClient}: a Windows-specific package for sending emails in R from
+the Outlook app. 
+
+... and several other email R packages!
+
 :::
 
-::: {.g-col-12 .g-col-md-6}
-How to cite
-: 1, Author, and Author 2. 2023. "How to create an article for Real World Data Science." Real World Data Science, Month Day, Year. [URL](url)
+::: {.column}
+![](images/blastula.png){fig-align="center" fig-alt="Hex sticker for blastula package" width=70%}
 :::
+
+:::
+
+## {ggirl}
+
+::: columns
+::: {.column}
+
+```{r}
+#| eval: false
+#| echo: true
+#| label: ggirl
+library(ggirl)
+contact_email <- "fakeemailforreal@gmail.com"
+send_address_1 <- address(
+  name = "Fake Personname",
+  address_line_1 = "250 North Ave",
+  city = "Boston", state = "MA",
+  postal_code = "22222", country = "US"
+)
+message_1 <- "This plot made me think of you!"
+ggpostcard(
+  plot,
+  contact_email,
+  messages = message_1,
+  send_addresses = send_address_1
+)
+```
+
+:::
+
+::: {.column}
+
+![](images/ggirl.png){fig-align="center" fig-alt="Hex sticker for ggirl package" width=70%}
+
+*by [Jacqueline Nolis](https://github.com/jnolis/ggirl)*
+
+:::
+
+:::
+
+## {ggirl}
+
+::: columns
+::: {.column width="10%"}
+:::
+
+::: {.column width="80%"}
+
+![](images/ggirl-examples.png){fig-align="center" fig-alt="Screenshot of ggirl example from GitHub"}
+
+:::
+
+::: {.column width="10%"}
+:::
+
+:::
+
+## Links
+
+::: columns
+::: {.column}
+
+Slides: [nrennie.github.io/oxford-RUG-christmas-cards](https://nrennie.github.io/oxford-RUG-christmas-cards)
+
+<br>
+
+Posit Cloud: [posit.cloud/content/6973285](https://posit.cloud/content/6973285)
+
+<br>
+
+GitHub: [github.com/nrennie/oxford-RUG-christmas-cards](https://github.com/nrennie/oxford-RUG-christmas-cards)
+
+:::
+::: {.column}
+
+![](images/ggsnowman.png){fig-align="center" fig-alt="snowman made with ggplot2" width="70%"}
+:::
+:::
+
+## Contact
+
+::: columns
+::: {.column}
+
+{{< fa brands linkedin >}} [nicola-rennie](https://www.linkedin.com/in/nicola-rennie/)
+
+{{< fa brands twitter >}} [@nrennie35](https://twitter.com/nrennie35)
+
+{{< fa brands mastodon >}} [fosstodon.org/@nrennie](https://fosstodon.org/@nrennie)
+
+{{< fa brands github >}} [nrennie](https://github.com/nrennie)
+
+{{< fa globe >}} [nrennie.rbind.io](https://nrennie.rbind.io/)
+
+:::
+::: {.column}
+
+![](../slides/_extensions/nrSlides/logo.png){fig-align="center" fig-alt="ggflowchart hex sticker logo" width=50%}
+
 :::
 :::
