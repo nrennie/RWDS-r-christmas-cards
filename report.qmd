@@ -1,7 +1,7 @@
 ---
 title: Creating Christmas Cards with R
 description: |
-  Though not ..., R is capable of creating ... . In this tutorial, Nicola Rennie walks us through the process of using R packages to create and send Christmas cards with R.
+  The programming langauge R is capable of creating a wide variety of geometric shapes that can be used to construct high quality graphics - including festive images. In this tutorial, Nicola Rennie walks us through the process of using R packages to create and send Christmas cards with R.
 categories:
   - R
   - Data Visualisation
@@ -34,7 +34,7 @@ page-layout: article
 title-block-banner: true
 ---
 
-When you think about data visualisation in R [@R-base], you'd be forgiven for not jumping straight to thinking about creating Christmas cards. However, the package and functions we often use to create bar charts and line graphs can be repurposed to create festive images. This tutorial provides a step-by-step guide to creating a Christmas card featuring a snowman - entirely in R. Though this seem like just a fun exercise, the functions and techniques you learn in this tutorial can also transfer into more traditional data visualisations created in R. 
+When you think about data visualisation in R [@R-base], you'd be forgiven for not jumping straight to thinking about creating Christmas cards. However, the package and functions we often use to create bar charts and line graphs can be repurposed to create festive images. This tutorial provides a step-by-step guide to creating a Christmas card featuring a snowman - entirely in R. Though this seem like just a fun exercise, the functions and techniques you learn in this tutorial can also transfer into more traditional data visualisations created in using {ggplot2} [@ggplot2] in R.. 
 
 The code in this tutorial relies on the following packages:
 
@@ -156,7 +156,9 @@ s4
 ![](images/s4.png){fig-alt="Dark blue square with off-white rectangle at the bottom and small random white stars, and two white circles slightly off centre."}
 :::
 
-Add some rocks for buttons and eyes...
+We can use `geom_point()` again to add some more points to represent the buttons and the eyes. Here, we'll manually specify the coordinates of the points. For the buttons we add them in a vertical line in the middle of the snowman's body circle, and for the eyes we add them in a horizontal line in the middle of the head circle. 
+
+Since no two rocks are exactly the same size, we can add some random variation to the size of the points using `runif()` again. We generate five different sizes between 2 and 4.5. For reference, the default point size is 1.5. Adding `scale_size_identity()` means that the sizes of the points are actually equally to the sizes we generated from `runif()` and removes the legend that is automatically added when we add `size` inside `aes()`.
 
 ```r
 s5 <- s4 +
@@ -172,20 +174,20 @@ s5 <- s4 +
 s5
 ```
 
-... and sticks for arms ...
+To add sticks for arms, we can make use of `geom_segment()` to draw some lines. We could also use `geom_path()` but it's designed connect points across multiple cases, whereas `geom_segment()` draws a single line per row of data - and we don't want to join the snowman's arms together!
+
+To use `geom_segment()` we need to create a data frame containing the x and y coordinates for start and end of each line, and then pass this into the aesthetic mapping with `aes()`. We can control the colour and width of the lines using the `colour` and `linewidth` arguments. Setting the `lineend` argument to `"round"` means that the ends of the lines will be rounded rather than the default straight edge.
 
 ```r
 s6 <- s5 + 
-  annotate(
-    geom = "segment",
-    x = 0.7, xend = 0.85, y = 0.3, yend = 0.4,
-    colour = "chocolate4",
-    lineend = "round",
-    linewidth = 2
-  ) +
-  annotate(
-    geom = "segment",
-    x = 0.46, xend = 0.33, y = 0.3, yend = 0.4,
+  geom_segment(
+    data = data.frame(
+      x = c(0.46, 0.7),
+      xend = c(0.33, 0.85),
+      y = c(0.3, 0.3),
+      yend = c(0.4, 0.4)
+    ),
+    mapping = aes(x = x, y = y, xend = xend, yend = yend),
     colour = "chocolate4",
     lineend = "round",
     linewidth = 2
@@ -199,7 +201,9 @@ s6
 ![](images/s6.png){fig-alt="Dark blue square with off-white rectangle at the bottom and small random white stars, and two white circles slightly off centre. Five black dots denote two eyes and three buttons on a snowman. Two brown lines look like arms."}
 :::
 
-and a hat!
+We'll now add a (very simple) hat to our snowman, fashioned out of two rectangles. We can add the rectangles as we did before using the `annotate()` function and specifying the locations of the corners of the rectangles. We start with a shorter wider rectangle for the brim of the hat, and then a taller, narrower rectangle for the crown of the hat. Since we'll colour them both `"brown"`, it doesn't matter if they overlap a little bit.
+
+This *might* be one of the situations we should have used `geom_rect()` instead of `annotate()` but it might take a lot of trial and error to position the hat exactly where we want it, and this seemed a little easier with `annotate()`.
 
 ```r
 s7 <- s6 +

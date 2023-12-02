@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Nicola Rennie">
-<meta name="dcterms.date" content="2023-12-01">
-<meta name="description" content="Though not …, R is capable of creating … . In this tutorial, Nicola Rennie walks us through the process of using R packages to create and send Christmas cards with R.">
+<meta name="dcterms.date" content="2023-12-02">
+<meta name="description" content="The programming langauge R is capable of creating a wide variety of geometric shapes that can be used to construct high quality graphics - including festive images. In this tutorial, Nicola Rennie walks us through the process of using R packages to create and send Christmas cards with R.">
 
 <title>Creating Christmas Cards with R</title>
 <style>
@@ -103,7 +103,7 @@ div.csl-indent {
       <h1 class="title">Creating Christmas Cards with R</h1>
                   <div>
         <div class="description">
-          <p>Though not …, R is capable of creating … . In this tutorial, Nicola Rennie walks us through the process of using R packages to create and send Christmas cards with R.</p>
+          <p>The programming langauge R is capable of creating a wide variety of geometric shapes that can be used to construct high quality graphics - including festive images. In this tutorial, Nicola Rennie walks us through the process of using R packages to create and send Christmas cards with R.</p>
         </div>
       </div>
                           <div class="quarto-categories">
@@ -126,7 +126,7 @@ div.csl-indent {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">December 1, 2023</p>
+        <p class="date">December 2, 2023</p>
       </div>
     </div>
     
@@ -153,7 +153,7 @@ div.csl-indent {
 
 
 
-<p>When you think about data visualisation in R <span class="citation" data-cites="R-base">(<a href="#ref-R-base" role="doc-biblioref">R Core Team 2022</a>)</span>, you’d be forgiven for not jumping straight to thinking about creating Christmas cards. However, the package and functions we often use to create bar charts and line graphs can be repurposed to create festive images. This tutorial provides a step-by-step guide to creating a Christmas card featuring a snowman - entirely in R. Though this seem like just a fun exercise, the functions and techniques you learn in this tutorial can also transfer into more traditional data visualisations created in R.</p>
+<p>When you think about data visualisation in R <span class="citation" data-cites="R-base">(<a href="#ref-R-base" role="doc-biblioref">R Core Team 2022</a>)</span>, you’d be forgiven for not jumping straight to thinking about creating Christmas cards. However, the package and functions we often use to create bar charts and line graphs can be repurposed to create festive images. This tutorial provides a step-by-step guide to creating a Christmas card featuring a snowman - entirely in R. Though this seem like just a fun exercise, the functions and techniques you learn in this tutorial can also transfer into more traditional data visualisations created in using {ggplot2} <span class="citation" data-cites="ggplot2">(<a href="#ref-ggplot2" role="doc-biblioref">Wickham 2016</a>)</span> in R..</p>
 <p>The code in this tutorial relies on the following packages:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggforce)</span>
@@ -256,7 +256,8 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>Add some rocks for buttons and eyes…</p>
+<p>We can use <code>geom_point()</code> again to add some more points to represent the buttons and the eyes. Here, we’ll manually specify the coordinates of the points. For the buttons we add them in a vertical line in the middle of the snowman’s body circle, and for the eyes we add them in a horizontal line in the middle of the head circle.</p>
+<p>Since no two rocks are exactly the same size, we can add some random variation to the size of the points using <code>runif()</code> again. We generate five different sizes between 2 and 4.5. For reference, the default point size is 1.5. Adding <code>scale_size_identity()</code> means that the sizes of the points are actually equally to the sizes we generated from <code>runif()</code> and removes the legend that is automatically added when we add <code>size</code> inside <code>aes()</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>s5 <span class="ot">&lt;-</span> s4 <span class="sc">+</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">data.frame</span>(</span>
@@ -268,23 +269,22 @@ div.csl-indent {
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_identity</span>()</span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>s5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>… and sticks for arms …</p>
+<p>To add sticks for arms, we can make use of <code>geom_segment()</code> to draw some lines. We could also use <code>geom_path()</code> but it’s designed connect points across multiple cases, whereas <code>geom_segment()</code> draws a single line per row of data - and we don’t want to join the snowman’s arms together!</p>
+<p>To use <code>geom_segment()</code> we need to create a data frame containing the x and y coordinates for start and end of each line, and then pass this into the aesthetic mapping with <code>aes()</code>. We can control the colour and width of the lines using the <code>colour</code> and <code>linewidth</code> arguments. Setting the <code>lineend</code> argument to <code>"round"</code> means that the ends of the lines will be rounded rather than the default straight edge.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>s6 <span class="ot">&lt;-</span> s5 <span class="sc">+</span> </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">"segment"</span>,</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fl">0.7</span>, <span class="at">xend =</span> <span class="fl">0.85</span>, <span class="at">y =</span> <span class="fl">0.3</span>, <span class="at">yend =</span> <span class="fl">0.4</span>,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"chocolate4"</span>,</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">lineend =</span> <span class="st">"round"</span>,</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="dv">2</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">"segment"</span>,</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fl">0.46</span>, <span class="at">xend =</span> <span class="fl">0.33</span>, <span class="at">y =</span> <span class="fl">0.3</span>, <span class="at">yend =</span> <span class="fl">0.4</span>,</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"chocolate4"</span>,</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">lineend =</span> <span class="st">"round"</span>,</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="dv">2</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>s6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">data.frame</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="fu">c</span>(<span class="fl">0.46</span>, <span class="fl">0.7</span>),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">xend =</span> <span class="fu">c</span>(<span class="fl">0.33</span>, <span class="fl">0.85</span>),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="fl">0.3</span>),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">yend =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.4</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">xend =</span> xend, <span class="at">yend =</span> yend),</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"chocolate4"</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">lineend =</span> <span class="st">"round"</span>,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="dv">2</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>s6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div>
 
 </div>
@@ -298,7 +298,8 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>and a hat!</p>
+<p>We’ll now add a (very simple) hat to our snowman, fashioned out of two rectangles. We can add the rectangles as we did before using the <code>annotate()</code> function and specifying the locations of the corners of the rectangles. We start with a shorter wider rectangle for the brim of the hat, and then a taller, narrower rectangle for the crown of the hat. Since we’ll colour them both <code>"brown"</code>, it doesn’t matter if they overlap a little bit.</p>
+<p>This <em>might</em> be one of the situations we should have used <code>geom_rect()</code> instead of <code>annotate()</code> but it might take a lot of trial and error to position the hat exactly where we want it, and this seemed a little easier with <code>annotate()</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>s7 <span class="ot">&lt;-</span> s6 <span class="sc">+</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">"rect"</span>,</span>
