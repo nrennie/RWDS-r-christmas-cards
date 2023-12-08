@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.506">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Nicola Rennie">
-<meta name="dcterms.date" content="2023-12-02">
-<meta name="description" content="The programming langauge R is capable of creating a wide variety of geometric shapes that can be used to construct high quality graphics - including festive images. In this tutorial, Nicola Rennie walks us through the process of using R packages to create and send Christmas cards with R.">
+<meta name="dcterms.date" content="2023-12-08">
+<meta name="description" content="The programming langauge R is capable of creating a wide variety of geometric shapes that can be used to construct high quality graphics – including festive images. In this tutorial, Nicola Rennie walks us through the process of using R packages to create and send Christmas cards with R.">
 
 <title>Creating Christmas Cards with R</title>
 <style>
@@ -25,7 +25,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -61,7 +61,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -103,12 +102,12 @@ div.csl-indent {
       <h1 class="title">Creating Christmas Cards with R</h1>
                   <div>
         <div class="description">
-          <p>The programming langauge R is capable of creating a wide variety of geometric shapes that can be used to construct high quality graphics - including festive images. In this tutorial, Nicola Rennie walks us through the process of using R packages to create and send Christmas cards with R.</p>
+          <p>The programming langauge R is capable of creating a wide variety of geometric shapes that can be used to construct high quality graphics – including festive images. In this tutorial, Nicola Rennie walks us through the process of using R packages to create and send Christmas cards with R.</p>
         </div>
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">R</div>
-                <div class="quarto-category">Data Visualisation</div>
+                <div class="quarto-category">Data visualisation</div>
               </div>
                   </div>
   </div>
@@ -126,7 +125,7 @@ div.csl-indent {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">December 2, 2023</p>
+        <p class="date">December 8, 2023</p>
       </div>
     </div>
     
@@ -152,14 +151,13 @@ div.csl-indent {
 
 
 
-
-<p>When you think about data visualisation in R <span class="citation" data-cites="R-base">(<a href="#ref-R-base" role="doc-biblioref">R Core Team 2022</a>)</span>, you’d be forgiven for not jumping straight to thinking about creating Christmas cards. However, the package and functions we often use to create bar charts and line graphs can be repurposed to create festive images. This tutorial provides a step-by-step guide to creating a Christmas card featuring a snowman - entirely in R. Though this seem like just a fun exercise, the functions and techniques you learn in this tutorial can also transfer into more traditional data visualisations created in using {ggplot2} <span class="citation" data-cites="ggplot2">(<a href="#ref-ggplot2" role="doc-biblioref">Wickham 2016</a>)</span> in R..</p>
+<p>When you think about data visualisation in R <span class="citation" data-cites="R-base">(<a href="#ref-R-base" role="doc-biblioref">R Core Team 2022</a>)</span>, you’d be forgiven for not jumping straight to thinking about creating Christmas cards. However, the package and functions we often use to create bar charts and line graphs can be repurposed to create festive images. This tutorial provides a step-by-step guide to creating a Christmas card featuring a snowman – entirely in R. Though this seems like just a fun exercise, the functions and techniques you learn in this tutorial can also transfer into more traditional data visualisations created using {ggplot2} <span class="citation" data-cites="ggplot2">(<a href="#ref-ggplot2" role="doc-biblioref">Wickham 2016</a>)</span> in R.</p>
 <p>The code in this tutorial relies on the following packages:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggforce)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <blockquote class="blockquote">
-<p>You may also have seen this tutorial presented at the Oxford R User Group November 2023 Meetup.</p>
+<p>You may also have seen this tutorial presented at the <a href="https://github.com/nrennie/oxford-RUG-christmas-cards">Oxford R User Group November 2023 Meetup</a>.</p>
 </blockquote>
 <section id="lets-build-a-snowman" class="level2">
 <h2 class="anchored" data-anchor-id="lets-build-a-snowman">Let’s build a snowman!</h2>
@@ -180,9 +178,9 @@ div.csl-indent {
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      )</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>s1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Next we’ll add some snow on the ground. We’ll do this by drawing a white rectangle along the bottom of the plot. There are two different functions that we could use to add a rectangle: <code>geom_rect()</code> or <code>annotate()</code>. The difference between the two is that <code>geom_rect()</code> maps columns of a <code>data.frame</code> to different elements of a plot whereas <code>annotate()</code> can take values passed in as vectors. Most of the {ggplot2} graphs you’ll see will use <code>geom_*()</code> functions. However, if you’re only adding one or two elements to a plot - then <code>annotate()</code> might be quicker.</p>
-<p>Since we’re only adding one rectangle for the snow, it’s easier to use <code>annotate()</code> with the <code>"rect"</code> geometry. This requires four arguments: the minimum and maximum x and y coordinates of the rectangle - essentially specifying where the corners are. We can also change the colour of the rectangle and its outline using the <code>fill</code> and <code>colour</code> arguments. Here, I’ve used a very light grey instead of white.</p>
-<p>If we don’t set the axis limits using <code>xlim()</code> and <code>ylim()</code>, the plot area will resize to fit the area of the snow rectangle. The night sky background will disappear. You can choose any axis limits you wish here - but the unit square will make it easier to find the right coordinates when deciding where to position other elements. Finally, we add <code>coord_fixed()</code> to fix the 1:1 aspect ratio and make sure our grid is actually square with <code>expand = FALSE</code> to remove the additional padding at the sides of the plot.</p>
+<p>Next we’ll add some snow on the ground. We’ll do this by drawing a white rectangle along the bottom of the plot. There are two different functions that we could use to add a rectangle: <code>geom_rect()</code> or <code>annotate()</code>. The difference between the two is that <code>geom_rect()</code> maps columns of a <code>data.frame</code> to different elements of a plot whereas <code>annotate()</code> can take values passed in as vectors. Most of the {ggplot2} graphs you’ll see will use <code>geom_*()</code> functions. However, if you’re only adding one or two elements to a plot then <code>annotate()</code> might be quicker.</p>
+<p>Since we’re only adding one rectangle for the snow, it’s easier to use <code>annotate()</code> with the <code>"rect"</code> geometry. This requires four arguments: the minimum and maximum x and y coordinates of the rectangle – essentially specifying where the corners are. We can also change the colour of the rectangle and its outline using the <code>fill</code> and <code>colour</code> arguments. Here, I’ve used a very light grey instead of white.</p>
+<p>If we don’t set the axis limits using <code>xlim()</code> and <code>ylim()</code>, the plot area will resize to fit the area of the snow rectangle. The night sky background will disappear. You can choose any axis limits you wish here – but the unit square will make it easier to find the right coordinates when deciding where to position other elements. Finally, we add <code>coord_fixed()</code> to fix the 1:1 aspect ratio and make sure our grid is actually square with <code>expand = FALSE</code> to remove the additional padding at the sides of the plot.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>s2 <span class="ot">&lt;-</span> s1 <span class="sc">+</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">"rect"</span>,</span>
@@ -195,10 +193,7 @@ div.csl-indent {
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>(<span class="at">expand =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>s2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div>
-
-</div>
-<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="images/s1.png" class="img-fluid" alt="Dark blue square."></p>
@@ -208,8 +203,8 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>To finish off the background, we’ll add some falling snowflakes. We first need to decide where on the plot the snowflakes will appear. We’ll be plotting lots of snowflakes so manually typing out the coordinates of where they’ll be would be very inefficient. Instead, we can use functions to generate the locations randomly. For this we’ll use the uniform distribution. The uniform distribution has two parameters - the lower and upper bounds where any values between the bounds are equally likely. You can generate samples from a uniform distribution in R using the <code>runif()</code> function.</p>
-<p>When generating random numbers in R (or any other programming language), it’s important to set a seed. This means that if you give your code to someone else, they’ll get the same random numbers as you. Some people choose to use the date as the random seed and since we’re making Christmas cards, we’ll use Christmas day as the random seed - in <code>yyyymmdd</code> format of course!</p>
+<p>To finish off the background, we’ll add some falling snowflakes. We first need to decide where on the plot the snowflakes will appear. We’ll be plotting lots of snowflakes, so manually typing out the coordinates of where they’ll be would be very inefficient. Instead, we can use functions to generate the locations randomly. For this we’ll use the uniform distribution. The uniform distribution has two parameters – the lower and upper bounds where any values between the bounds are equally likely. You can generate samples from a uniform distribution in R using the <code>runif()</code> function.</p>
+<p>When generating random numbers in R (or any other programming language), it’s important to set a seed. This means that if you give your code to someone else, they’ll get the same random numbers as you. Some people choose to use the date as the random seed and since we’re making Christmas cards, we’ll use Christmas day as the random seed – in <code>yyyymmdd</code> format, of course!</p>
 <p>We create a variable <code>n</code> specifying how many snowflakes we’ll create. Creating a variable rather than hard coding the variables makes it easier to vary how many snowflakes we want. Since our plot grid goes between 0 and 1 in both the x and y directions, we generate random numbers between 0 and 1 for both the x and y coordinates and store the values in a <code>data.frame</code> called <code>snowflakes</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20231225</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
@@ -217,7 +212,7 @@ div.csl-indent {
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">runif</span>(n, <span class="dv">0</span>, <span class="dv">1</span>),</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">runif</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Now we can plot the <code>snowflakes</code> data using <code>geom_point()</code> - the same function you’d use for a scatter plot. Since we’re using a <code>geom_*()</code> function, we need to tell {ggplot2} which columns go on the <code>x</code> and <code>y</code> axes inside the <code>aes()</code> function. To plot the snowflakes, we’re going to make using of R’s different point characters. The default when plotting with <code>geom_point()</code> is a small black dot, but we can choose to use a small star (close enough to a snowflake!) by setting <code>pch = 8</code> and changing the <code>colour</code> to <code>"white"</code>.</p>
+<p>Now we can plot the <code>snowflakes</code> data using <code>geom_point()</code> – the same function you’d use for a scatter plot. Since we’re using a <code>geom_*()</code> function, we need to tell {ggplot2} which columns go on the <code>x</code> and <code>y</code> axes inside the <code>aes()</code> function. To plot the snowflakes, we’re going to make using of R’s different point characters. The default when plotting with <code>geom_point()</code> is a small black dot, but we can choose to use a small star (close enough to a snowflake!) by setting <code>pch = 8</code> and changing the <code>colour</code> to <code>"white"</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>s3 <span class="ot">&lt;-</span> s2 <span class="sc">+</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> snowflakes,</span>
@@ -229,7 +224,7 @@ div.csl-indent {
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">pch =</span> <span class="dv">8</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>s3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Now comes the part where we start rolling up some snowballs! Or in the case of an R snowman - draw some circles. Unfortunately, there isn’t a built-in <code>geom_*()</code> function in {ggplot2} for plotting circles. We could use <code>geom_point()</code> here and increase the size of the points but this approach can look a little but <em>fuzzy</em> when the points are very large. Instead, we’ll turn to a {ggplot2} extension package for some additional <code>geom_*</code> functions - {ggforce} <span class="citation" data-cites="ggforce">(<a href="#ref-ggforce" role="doc-biblioref">Pedersen 2022</a>)</span>.</p>
+<p>Now comes the part where we start rolling up some snowballs! Or, in the case of an R snowman, we draw some circles. Unfortunately, there isn’t a built-in <code>geom_*()</code> function in {ggplot2} for plotting circles. We could use <code>geom_point()</code> here and increase the size of the points but this approach can look a little bit <em>fuzzy</em> when the points are very large. Instead, we’ll turn to a {ggplot2} extension package for some additional <code>geom_*</code> functions - {ggforce} <span class="citation" data-cites="ggforce">(<a href="#ref-ggforce" role="doc-biblioref">Pedersen 2022</a>)</span>.</p>
 <p>The <code>geom_circle()</code> function requires at least three elements mapped to the aesthetics inside <code>aes()</code>: the coordinates of the centre of the circle given by <code>x0</code> and <code>y0</code>, and the radii of each of the circles, <code>r</code>. Instead of creating a separate data frame and passing it into <code>geom_circle()</code>, we can alternatively create the data frame inside the function. The <code>fill</code> and <code>colour</code> arguments work as they do in {ggplot2} and we can set both to <code>"white"</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>s4 <span class="ot">&lt;-</span> s3 <span class="sc">+</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_circle</span>(</span>
@@ -243,10 +238,7 @@ div.csl-indent {
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"white"</span></span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>s4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div>
-
-</div>
-<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="images/s3.png" class="img-fluid" alt="Dark blue square with off-white rectangle at the bottom and small random white stars."></p>
@@ -269,8 +261,8 @@ div.csl-indent {
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_identity</span>()</span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>s5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>To add sticks for arms, we can make use of <code>geom_segment()</code> to draw some lines. We could also use <code>geom_path()</code> but it’s designed connect points across multiple cases, whereas <code>geom_segment()</code> draws a single line per row of data - and we don’t want to join the snowman’s arms together!</p>
-<p>To use <code>geom_segment()</code> we need to create a data frame containing the x and y coordinates for start and end of each line, and then pass this into the aesthetic mapping with <code>aes()</code>. We can control the colour and width of the lines using the <code>colour</code> and <code>linewidth</code> arguments. Setting the <code>lineend</code> argument to <code>"round"</code> means that the ends of the lines will be rounded rather than the default straight edge.</p>
+<p>To add sticks for arms, we can make use of <code>geom_segment()</code> to draw some lines. We could also use <code>geom_path()</code> but that is designed to connect points across multiple cases, whereas <code>geom_segment()</code> draws a single line per row of data – and we don’t want to join the snowman’s arms together!</p>
+<p>To use <code>geom_segment()</code> we need to create a data frame containing the x and y coordinates for the start and end of each line, and then pass this into the aesthetic mapping with <code>aes()</code>. We can control the colour and width of the lines using the <code>colour</code> and <code>linewidth</code> arguments. Setting the <code>lineend</code> argument to <code>"round"</code> means that the ends of the lines will be rounded rather than the default straight edge.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>s6 <span class="ot">&lt;-</span> s5 <span class="sc">+</span> </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">data.frame</span>(</span>
@@ -285,10 +277,7 @@ div.csl-indent {
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="dv">2</span></span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>s6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div>
-
-</div>
-<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="images/s5.png" class="img-fluid" alt="Dark blue square with off-white rectangle at the bottom and small random white stars, and two white circles slightly off centre. Five black dots denote two eyes and three buttons on a snowman."></p>
@@ -314,8 +303,8 @@ div.csl-indent {
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"brown"</span></span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>s7</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Now we can move on to the final component of building a snowman - the carrot for his nose! We’re going to use a triangle for the nose. Unfortunately, there are no built-in triangle geoms in {ggplot2} so we’ll have to make our own. There are different ways to do this, but here we’re going to make use of the {sf} package <span class="citation" data-cites="sf">(<a href="#ref-sf" role="doc-biblioref">Pebesma 2018</a>)</span>. The {sf} package (short for <em>simple features</em>) is designed for working with spatial data. Although we’re not working with maps, we can still use {sf} to make shapes - including polygons.</p>
-<p>We start by constructing a matrix with two columns - one for x coordinates and one for y. The x coordinates start in the middle of the head on go slightly to the right for the triangle point. The y coordinates take a little bit more trial and error to get right. Note that although triangles only have three corners, we have four rows of points. The last row must be the same as the first to make the polygon <em>closed</em>. The matrix is then converted into a spatial object using the <code>st_polygon()</code> function, and we can check how it looks using <code>plot()</code>.</p>
+<p>Now we can move on to the final component of building a snowman – the carrot for his nose! We’re going to use a triangle for the nose. Unfortunately, there are no built-in triangle geoms in {ggplot2} so we’ll have to make our own. There are different ways to do this, but here we’re going to make use of the {sf} package <span class="citation" data-cites="sf">(<a href="#ref-sf" role="doc-biblioref">Pebesma 2018</a>)</span>. The {sf} package (short for <em>simple features</em>) is designed for working with spatial data. Although we’re not working with maps, we can still use {sf} to make shapes – including polygons.</p>
+<p>We start by constructing a matrix with two columns – one for x coordinates and one for y. The x coordinates start in the middle of the head and go slightly to the right for the triangle point. The y coordinates take a little bit more trial and error to get right. Note that although triangles only have three corners, we have four rows of points. The last row must be the same as the first to make the polygon <em>closed</em>. The matrix is then converted into a spatial object using the <code>st_polygon()</code> function, and we can check how it looks using <code>plot()</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>nose_pts <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.6</span>, <span class="fl">0.5</span>,</span>
@@ -328,10 +317,7 @@ div.csl-indent {
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>nose <span class="ot">&lt;-</span> <span class="fu">st_polygon</span>(<span class="fu">list</span>(nose_pts))</span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nose)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div>
-
-</div>
-<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="images/s7.png" class="img-fluid" alt="Dark blue square with off-white rectangle at the bottom and small random white stars, and two white circles slightly off centre. Five black dots denote two eyes and three buttons on a snowman. Two brown lines look like arms. Two red rectangles form a hat."></p>
@@ -341,7 +327,7 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>We can plot <code>sf</code> objects with {ggplot2} using <code>geom_sf()</code>. <code>geom_sf()</code> is a slightly special <code>geom</code> since we don’t need to specify an aesthetic mapping for the <code>x</code> and <code>y</code> axes - they are determined automatically from the <code>sf</code> object along with which type of geometry to draw. If your <code>sf</code> object has points, points will be drawn. If it has country shapes, polygons will be drawn. Like other <code>geom_*()</code> functions, we can change the <code>colour</code> and <code>fill</code> arguments to a different colour - in this case <code>"orange"</code> to represent a carrot!</p>
+<p>We can plot <code>sf</code> objects with {ggplot2} using <code>geom_sf()</code>. <code>geom_sf()</code> is a slightly special <code>geom</code> since we don’t need to specify an aesthetic mapping for the <code>x</code> and <code>y</code> axes – they are determined automatically from the <code>sf</code> object along with which type of geometry to draw. If your <code>sf</code> object has points, points will be drawn. If it has country shapes, polygons will be drawn. Like other <code>geom_*()</code> functions, we can change the <code>colour</code> and <code>fill</code> arguments to a different colour – in this case <code>"orange"</code> to represent a carrot!</p>
 <p>You should see a <code>Coordinate system already present. Adding new coordinate system, which will replace the existing one.</code> message when you run the following code. The is because <code>geom_sf</code> forces it’s own coordinate system on the plot overriding our previous code specifying <code>coord_fixed()</code>. If you run it without the <code>coord_sf(expand = FALSE)</code>, the extra space around the plot will reappear. We can remove it again with <code>expand = FALSE</code>.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>s8 <span class="ot">&lt;-</span> s7 <span class="sc">+</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
@@ -354,7 +340,7 @@ div.csl-indent {
 <blockquote class="blockquote">
 <p>You <em>could</em> skip the <code>sf</code> part of this completely and pass the coordinates directly into <code>geom_polygon()</code> instead. However, I’ve often found it quicker and easier to tinker with polygon shapes using <code>sf</code>.</p>
 </blockquote>
-<p>A key part of any Christmas card is the message wishing recipients a Merry Christmas! We can add text to our plot using the <code>annotate()</code> function and the <code>"text"</code> geometry (you could instead use <code>geom_text()</code> if you prefer). When adding text, we require at least three arguments: the <code>x</code> and <code>y</code> coordinates of where the text should be added, and the <code>label</code> denoting what text should appear. We can supply additional arguments to <code>annotate()</code> to style the text such as: <code>colour</code> (which changes the colour of the text); <code>family</code> (to define which font to use); <code>fontface</code> (which determines if the font is bold or italic, for example); and <code>size</code> (which changes the size of the text). The <code>"mono"</code> option for <code>family</code> tells {ggplot2} to use the default system monospace font.</p>
+<p>A key part of any Christmas card is the message wishing recipients a Merry Christmas! We can add text to our plot using the <code>annotate()</code> function and the <code>"text"</code> geometry (you could instead use <code>geom_text()</code> if you prefer). When adding text, we require at least three arguments: the <code>x</code> and <code>y</code> coordinates of where the text should be added, and the <code>label</code> denoting what text should appear. We can supply additional arguments to <code>annotate()</code> to style the text, such as: <code>colour</code> (which changes the colour of the text); <code>family</code> (to define which font to use); <code>fontface</code> (which determines if the font is bold or italic, for example); and <code>size</code> (which changes the size of the text). The <code>"mono"</code> option for <code>family</code> tells {ggplot2} to use the default system monospace font.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>s9 <span class="ot">&lt;-</span> s8 <span class="sc">+</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">"text"</span>,</span>
@@ -365,10 +351,7 @@ div.csl-indent {
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">7</span></span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>s9</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div>
-
-</div>
-<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="images/s8.png" class="img-fluid" alt="Dark blue square with off-white rectangle at the bottom and small random white stars, and two white circles slightly off centre. Five black dots denote two eyes and three buttons on a snowman. Two brown lines look like arms. Two red rectangles form a hat. Orange triangle as a nose."></p>
@@ -387,12 +370,12 @@ div.csl-indent {
 <section id="other-christmas-r-packages" class="level2">
 <h2 class="anchored" data-anchor-id="other-christmas-r-packages">Other Christmas R packages</h2>
 <p>If you’re curious about making Christmas cards with R but you don’t have the time to make them from scratch, you’ll likely find the <code>christmas</code> R package <span class="citation" data-cites="christmas">(<a href="#ref-christmas" role="doc-biblioref">Barrera-Gomez 2022</a>)</span> helpful. This package from Jose Barrera-Gomez can generate lots of different Christmas cards, many of them animated and available in different languages (English, Catalan and Spanish).</p>
-<p>Emil Hvitfeldt has also created a <a href="https://quarto.org/">Quarto</a> <a href="https://github.com/EmilHvitfeldt/quarto-snow">extension that gives the effect of falling snowflakes</a> on HTML outputs - including revealjs slides which is perfect for festive presentations!</p>
+<p>Emil Hvitfeldt has also created a <a href="https://quarto.org/">Quarto</a> <a href="https://github.com/EmilHvitfeldt/quarto-snow">extension that gives the effect of falling snowflakes</a> on HTML outputs – including revealjs slides which is perfect for festive presentations!</p>
 <p>Have you made your own Christmas cards with R? We’d love to see your designs!</p>
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-christmas" class="csl-entry" role="listitem">
 Barrera-Gomez, Jose. 2022. <em>Christmas: Generation of Different Animated Christmas Cards</em>. <a href="https://CRAN.R-project.org/package=christmas">https://CRAN.R-project.org/package=christmas</a>.
 </div>
@@ -492,9 +475,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -504,17 +488,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -527,135 +502,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        typesetMath(container);
-        return container.innerHTML
-      } else {
-        typesetMath(note);
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      typesetMath(note);
-      return note.innerHTML;
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -699,7 +545,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -725,32 +570,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -811,7 +630,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-
 
 
 
