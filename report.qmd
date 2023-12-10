@@ -1,10 +1,10 @@
 ---
-title: Creating Christmas Cards with R
+title: Creating Christmas cards with R
 description: |
-  The programming langauge R is capable of creating a wide variety of geometric shapes that can be used to construct high quality graphics - including festive images. In this tutorial, Nicola Rennie walks us through the process of using R packages to create and send Christmas cards with R.
+  The programming langauge R is capable of creating a wide variety of geometric shapes that can be used to construct high quality graphics -- including festive images. In this tutorial, Nicola Rennie walks us through the process of using R packages to create and send Christmas cards with R.
 categories:
   - R
-  - Data Visualisation
+  - Data visualisation
 author: Nicola Rennie
 date: last-modified
 date-format: long
@@ -18,23 +18,18 @@ format:
       sidebar-width: 0px
       body-width: 1000px
       margin-width: 250px
-    code-annotations: below
-    mermaid: 
-      theme: neutral
 bibliography: references.bib
-csl: chicago.csl
 execute:
   eval: false
   echo: true
   messages: false
   error: false
   warning: false
-nocite: '@*'
 page-layout: article
 title-block-banner: true
 ---
 
-When you think about data visualisation in R [@R-base], you'd be forgiven for not jumping straight to thinking about creating Christmas cards. However, the package and functions we often use to create bar charts and line graphs can be repurposed to create festive images. This tutorial provides a step-by-step guide to creating a Christmas card featuring a snowman - entirely in R. Though this seem like just a fun exercise, the functions and techniques you learn in this tutorial can also transfer into more traditional data visualisations created in using {ggplot2} [@ggplot2] in R.. 
+When you think about data visualisation in R [@R-base], you'd be forgiven for not jumping straight to thinking about creating Christmas cards. However, the package and functions we often use to create bar charts and line graphs can be repurposed to create festive images. This tutorial provides a step-by-step guide to creating a Christmas card featuring a snowman -- entirely in R. Though this seems like just a fun exercise, the functions and techniques you learn in this tutorial can also transfer into more traditional data visualisations created using {ggplot2} [@ggplot2] in R. 
 
 The code in this tutorial relies on the following packages:
 
@@ -44,7 +39,7 @@ library(ggforce)
 library(sf)
 ```
 
-> You may also have seen this tutorial presented at the Oxford R User Group November 2023 Meetup.
+> You may also have seen this tutorial presented at the [Oxford R User Group November 2023 Meetup](https://github.com/nrennie/oxford-RUG-christmas-cards).
 
 ## Let's build a snowman! 
 
@@ -73,11 +68,11 @@ s1 <- ggplot() +
 s1
 ```
 
-Next we'll add some snow on the ground. We'll do this by drawing a white rectangle along the bottom of the plot. There are two different functions that we could use to add a rectangle: `geom_rect()` or `annotate()`. The difference between the two is that `geom_rect()` maps columns of a `data.frame` to different elements of a plot whereas `annotate()` can take values passed in as vectors. Most of the {ggplot2} graphs you'll see will use `geom_*()` functions. However, if you're only adding one or two elements to a plot - then `annotate()` might be quicker.
+Next we'll add some snow on the ground. We'll do this by drawing a white rectangle along the bottom of the plot. There are two different functions that we could use to add a rectangle: `geom_rect()` or `annotate()`. The difference between the two is that `geom_rect()` maps columns of a `data.frame` to different elements of a plot whereas `annotate()` can take values passed in as vectors. Most of the {ggplot2} graphs you'll see will use `geom_*()` functions. However, if you're only adding one or two elements to a plot then `annotate()` might be quicker.
 
-Since we're only adding one rectangle for the snow, it's easier to use `annotate()` with the `"rect"` geometry. This requires four arguments: the minimum and maximum x and y coordinates of the rectangle - essentially specifying where the corners are. We can also change the colour of the rectangle and its outline using the `fill` and `colour` arguments. Here, I've used a very light grey instead of white.
+Since we're only adding one rectangle for the snow, it's easier to use `annotate()` with the `"rect"` geometry. This requires four arguments: the minimum and maximum x and y coordinates of the rectangle -- essentially specifying where the corners are. We can also change the colour of the rectangle and its outline using the `fill` and `colour` arguments. Here, I've used a very light grey instead of white.
 
-If we don't set the axis limits using `xlim()` and `ylim()`, the plot area will resize to fit the area of the snow rectangle. The night sky background will disappear. You can choose any axis limits you wish here - but the unit square will make it easier to find the right coordinates when deciding where to position other elements. Finally, we add `coord_fixed()` to fix the 1:1 aspect ratio and make sure our grid is actually square with `expand = FALSE` to remove the additional padding at the sides of the plot.
+If we don't set the axis limits using `xlim()` and `ylim()`, the plot area will resize to fit the area of the snow rectangle. The night sky background will disappear. You can choose any axis limits you wish here -- but the unit square will make it easier to find the right coordinates when deciding where to position other elements. Finally, we add `coord_fixed()` to fix the 1:1 aspect ratio and make sure our grid is actually square with `expand = FALSE` to remove the additional padding at the sides of the plot.
 
 ```r
 s2 <- s1 +
@@ -100,9 +95,9 @@ s2
 ![](images/s2.png){fig-alt="Dark blue square with off-white rectangle at the bottom."}
 :::
 
-To finish off the background, we'll add some falling snowflakes. We first need to decide where on the plot the snowflakes will appear. We'll be plotting lots of snowflakes so manually typing out the coordinates of where they'll be would be very inefficient. Instead, we can use functions to generate the locations randomly. For this we'll use the uniform distribution. The uniform distribution has two parameters - the lower and upper bounds where any values between the bounds are equally likely. You can generate samples from a uniform distribution in R using the `runif()` function.
+To finish off the background, we'll add some falling snowflakes. We first need to decide where on the plot the snowflakes will appear. We'll be plotting lots of snowflakes, so manually typing out the coordinates of where they'll be would be very inefficient. Instead, we can use functions to generate the locations randomly. For this we'll use the uniform distribution. The uniform distribution has two parameters -- the lower and upper bounds where any values between the bounds are equally likely. You can generate samples from a uniform distribution in R using the `runif()` function.
 
-When generating random numbers in R (or any other programming language), it's important to set a seed. This means that if you give your code to someone else, they'll get the same random numbers as you. Some people choose to use the date as the random seed and since we're making Christmas cards, we'll use Christmas day as the random seed - in `yyyymmdd` format of course!
+When generating random numbers in R (or any other programming language), it's important to set a seed. This means that if you give your code to someone else, they'll get the same random numbers as you. Some people choose to use the date as the random seed and since we're making Christmas cards, we'll use Christmas day as the random seed -- in `yyyymmdd` format, of course!
 
 We create a variable `n` specifying how many snowflakes we'll create. Creating a variable rather than hard coding the variables makes it easier to vary how many snowflakes we want. Since our plot grid goes between 0 and 1 in both the x and y directions, we generate random numbers between 0 and 1 for both the x and y coordinates and store the values in a `data.frame` called `snowflakes`.
 
@@ -115,7 +110,7 @@ snowflakes <- data.frame(
 )
 ```
 
-Now we can plot the `snowflakes` data using `geom_point()` - the same function you'd use for a scatter plot. Since we're using a `geom_*()` function, we need to tell {ggplot2} which columns go on the `x` and `y` axes inside the `aes()` function. To plot the snowflakes, we're going to make using of R's different point characters. The default when plotting with `geom_point()` is a small black dot, but we can choose to use a small star (close enough to a snowflake!) by setting `pch = 8` and changing the `colour` to `"white"`.
+Now we can plot the `snowflakes` data using `geom_point()` -- the same function you'd use for a scatter plot. Since we're using a `geom_*()` function, we need to tell {ggplot2} which columns go on the `x` and `y` axes inside the `aes()` function. To plot the snowflakes, we're going to make using of R's different point characters. The default when plotting with `geom_point()` is a small black dot, but we can choose to use a small star (close enough to a snowflake!) by setting `pch = 8` and changing the `colour` to `"white"`.
 
 ```r
 s3 <- s2 +
@@ -131,7 +126,7 @@ s3 <- s2 +
 s3
 ```
 
-Now comes the part where we start rolling up some snowballs! Or in the case of an R snowman - draw some circles. Unfortunately, there isn't a built-in `geom_*()` function in {ggplot2} for plotting circles. We could use `geom_point()` here and increase the size of the points but this approach can look a little but *fuzzy* when the points are very large. Instead, we'll turn to a {ggplot2} extension package for some additional `geom_*` functions - {ggforce} [@ggforce]. 
+Now comes the part where we start rolling up some snowballs! Or, in the case of an R snowman, we draw some circles. Unfortunately, there isn't a built-in `geom_*()` function in {ggplot2} for plotting circles. We could use `geom_point()` here and increase the size of the points but this approach can look a little bit *fuzzy* when the points are very large. Instead, we'll turn to a {ggplot2} extension package for some additional `geom_*` functions - {ggforce} [@ggforce]. 
 
 The `geom_circle()` function requires at least three elements mapped to the aesthetics inside `aes()`: the coordinates of the centre of the circle given by `x0` and `y0`, and the radii of each of the circles, `r`. Instead of creating a separate data frame and passing it into `geom_circle()`, we can alternatively create the data frame inside the function. The `fill` and `colour` arguments work as they do in {ggplot2} and we can set both to `"white"`.
 
@@ -174,9 +169,9 @@ s5 <- s4 +
 s5
 ```
 
-To add sticks for arms, we can make use of `geom_segment()` to draw some lines. We could also use `geom_path()` but it's designed connect points across multiple cases, whereas `geom_segment()` draws a single line per row of data - and we don't want to join the snowman's arms together!
+To add sticks for arms, we can make use of `geom_segment()` to draw some lines. We could also use `geom_path()` but that is designed to connect points across multiple cases, whereas `geom_segment()` draws a single line per row of data -- and we don't want to join the snowman's arms together!
 
-To use `geom_segment()` we need to create a data frame containing the x and y coordinates for start and end of each line, and then pass this into the aesthetic mapping with `aes()`. We can control the colour and width of the lines using the `colour` and `linewidth` arguments. Setting the `lineend` argument to `"round"` means that the ends of the lines will be rounded rather than the default straight edge.
+To use `geom_segment()` we need to create a data frame containing the x and y coordinates for the start and end of each line, and then pass this into the aesthetic mapping with `aes()`. We can control the colour and width of the lines using the `colour` and `linewidth` arguments. Setting the `lineend` argument to `"round"` means that the ends of the lines will be rounded rather than the default straight edge.
 
 ```r
 s6 <- s5 + 
@@ -222,9 +217,9 @@ s7 <- s6 +
 s7
 ```
 
-Now we can move on to the final component of building a snowman - the carrot for his nose! We're going to use a triangle for the nose. Unfortunately, there are no built-in triangle geoms in {ggplot2} so we'll have to make our own. There are different ways to do this, but here we're going to make use of the {sf} package [@sf]. The {sf} package (short for *simple features*) is designed for working with spatial data. Although we're not working with maps, we can still use {sf} to make shapes - including polygons.
+Now we can move on to the final component of building a snowman -- the carrot for his nose! We're going to use a triangle for the nose. Unfortunately, there are no built-in triangle geoms in {ggplot2} so we'll have to make our own. There are different ways to do this, but here we're going to make use of the {sf} package [@sf]. The {sf} package (short for *simple features*) is designed for working with spatial data. Although we're not working with maps, we can still use {sf} to make shapes -- including polygons.
 
-We start by constructing a matrix with two columns - one for x coordinates and one for y. The x coordinates start in the middle of the head on go slightly to the right for the triangle point. The y coordinates take a little bit more trial and error to get right. Note that although triangles only have three corners, we have four rows of points. The last row must be the same as the first to make the polygon *closed*. The matrix is then converted into a spatial object using the `st_polygon()` function, and we can check how it looks using `plot()`.
+We start by constructing a matrix with two columns -- one for x coordinates and one for y. The x coordinates start in the middle of the head and go slightly to the right for the triangle point. The y coordinates take a little bit more trial and error to get right. Note that although triangles only have three corners, we have four rows of points. The last row must be the same as the first to make the polygon *closed*. The matrix is then converted into a spatial object using the `st_polygon()` function, and we can check how it looks using `plot()`.
 
 ```r
 nose_pts <- matrix(
@@ -247,7 +242,7 @@ plot(nose)
 ![](images/nose.png){fig-alt="Outline of a triangle pointing to the right against a white background."}
 :::
 
-We can plot `sf` objects with {ggplot2} using `geom_sf()`. `geom_sf()` is a slightly special `geom` since we don't need to specify an aesthetic mapping for the `x` and `y` axes - they are determined automatically from the `sf` object along with which type of geometry to draw. If your `sf` object has points, points will be drawn. If it has country shapes, polygons will be drawn. Like other `geom_*()` functions, we can change the `colour` and `fill` arguments to a different colour - in this case `"orange"` to represent a carrot!
+We can plot `sf` objects with {ggplot2} using `geom_sf()`. `geom_sf()` is a slightly special `geom` since we don't need to specify an aesthetic mapping for the `x` and `y` axes -- they are determined automatically from the `sf` object along with which type of geometry to draw. If your `sf` object has points, points will be drawn. If it has country shapes, polygons will be drawn. Like other `geom_*()` functions, we can change the `colour` and `fill` arguments to a different colour -- in this case `"orange"` to represent a carrot!
 
 You should see a `Coordinate system already present. Adding new coordinate system, which will replace the existing one.` message when you run the following code. The is because `geom_sf` forces it's own coordinate system on the plot overriding our previous code specifying `coord_fixed()`. If you run it without the `coord_sf(expand = FALSE)`, the extra space around the plot will reappear. We can remove it again with `expand = FALSE`.
 
@@ -264,7 +259,7 @@ s8
 
 > You *could* skip the `sf` part of this completely and pass the coordinates directly into `geom_polygon()` instead. However, I've often found it quicker and easier to tinker with polygon shapes using `sf`. 
 
-A key part of any Christmas card is the message wishing recipients a Merry Christmas! We can add text to our plot using the `annotate()` function and the `"text"` geometry (you could instead use `geom_text()` if you prefer). When adding text, we require at least three arguments: the `x` and `y` coordinates of where the text should be added, and the `label` denoting what text should appear. We can supply additional arguments to `annotate()` to style the text such as: `colour` (which changes the colour of the text); `family` (to define which font to use); `fontface` (which determines if the font is bold or italic, for example); and `size` (which changes the size of the text). The `"mono"` option for `family` tells {ggplot2} to use the default system monospace font.
+A key part of any Christmas card is the message wishing recipients a Merry Christmas! We can add text to our plot using the `annotate()` function and the `"text"` geometry (you could instead use `geom_text()` if you prefer). When adding text, we require at least three arguments: the `x` and `y` coordinates of where the text should be added, and the `label` denoting what text should appear. We can supply additional arguments to `annotate()` to style the text, such as: `colour` (which changes the colour of the text); `family` (to define which font to use); `fontface` (which determines if the font is bold or italic, for example); and `size` (which changes the size of the text). The `"mono"` option for `family` tells {ggplot2} to use the default system monospace font.
 
 ```r
 s9 <- s8 +
@@ -294,6 +289,6 @@ There are many different R packages for sending emails from R. If you create a d
 
 If you're curious about making Christmas cards with R but you don't have the time to make them from scratch, you'll likely find the `christmas` R package [@christmas] helpful. This package from Jose Barrera-Gomez can generate lots of different Christmas cards, many of them animated and available in different languages (English, Catalan and Spanish).
 
-Emil Hvitfeldt has also created a [Quarto](https://quarto.org/) [extension that gives the effect of falling snowflakes](https://github.com/EmilHvitfeldt/quarto-snow) on HTML outputs - including revealjs slides which is perfect for festive presentations!
+Emil Hvitfeldt has also created a [Quarto](https://quarto.org/) [extension that gives the effect of falling snowflakes](https://github.com/EmilHvitfeldt/quarto-snow) on HTML outputs -- including revealjs slides which is perfect for festive presentations!
 
 Have you made your own Christmas cards with R? We'd love to see your designs!
