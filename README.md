@@ -1,19 +1,19 @@
 # Creating Christmas Cards in R
 
-This post was inspired by the "Making Christmas Cards in R" session that I ran for Oxford R User Group.
+The programming language R is capable of creating a wide variety of geometric shapes that can be used to construct high quality graphics – including festive images. In this tutorial, Nicola Rennie walks us through the process of using R packages to create and send Christmas cards with R.
 
-## Real World Data Science Template 👨🏼💻
+Published online at [realworlddatascience.net/ideas/tutorials/posts/2023/12/12/xmas-cards.html](https://realworlddatascience.net/ideas/tutorials/posts/2023/12/12/xmas-cards.html).
 
-This post was created using the [Real World Data Science Template](https://github.com/finnoh/RWDS_post_template).
+## Source code
 
-Files and stylesheets to help contributors create content for [Real World Data Science](https://realworlddatascience.net/), a new data science publication from the [Royal Statistical Society](https://rss.org.uk/).
+### Real World Data Science Quarto Template
 
-- `report.qmd` is the place to write your draft article. The default version of this file includes a showcase of Quarto formatting options used by RWDS. Quarto is a versatile document format that facilitates the creation of beautifully formatted articles, and the inclusion of RWDS stylesheets means that rendered documents using this template will be presented in the RWDS "house style".
+This article is written using [Quarto](https://quarto.org/), an open-source scientific and technical publishing system. This post was created using the [Real World Data Science Template](https://github.com/finnoh/RWDS_post_template), created by [Finn-Ole Höner](https://github.com/finnoh). 
 
-- `references.bib` is the place to list any references -- academic papers, books, or other works relevant to your article. This document is in BibTeX format, which is a standard format for bibliographic information. By maintaining your references in this structured format, you can easily cite them within the `report.qmd` file, and they will be automatically formatted in the specified citation style when generating the article. This ensures accurate and consistent citations in your articles.
+### R packages
 
-- The **images** folder is where you should store any image and figure files. In your `report.qmd`, you can insert these files using, for example, `![figure caption](images/figure.png)`.
+This article was written using R version 4.3.2 (2023-10-31 ucrt), and the following packages:
 
-For more information on RWDS article types and submission and review processes, see the RWDS [call for contributions](https://realworlddatascience.net/contributor-docs/call-for-contributions.html). For more information on working with Quarto, see the [official documentation](https://quarto.org).
-
-Repository creator Finn writes [The Repo newsletter](https://dsecon.substack.com), where he curates remarkable open-source programmers and projects in data science. Check it out!
+* ggplot2 - version 3.4.4
+* ggforce - version 0.4.1.9000
+* sf - version 1.0.14
