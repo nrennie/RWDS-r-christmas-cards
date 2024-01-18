@@ -2,7 +2,7 @@
 
 The programming language R is capable of creating a wide variety of geometric shapes that can be used to construct high quality graphics – including festive images. In this tutorial, Nicola Rennie walks us through the process of using R packages to create and send Christmas cards with R.
 
-Published online at [realworlddatascience.net/ideas/tutorials/posts/2023/12/12/xmas-cards.html](https://realworlddatascience.net/ideas/tutorials/posts/2023/12/12/xmas-cards.html).
+Published online: [realworlddatascience.net/ideas/tutorials/posts/2023/12/12/xmas-cards.html](https://realworlddatascience.net/ideas/tutorials/posts/2023/12/12/xmas-cards.html).
 
 doi: [10.5281/zenodo.10530635](https://doi.org/10.5281/zenodo.10530635)
 
