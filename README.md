@@ -4,6 +4,8 @@ The programming language R is capable of creating a wide variety of geometric sh
 
 Published online at [realworlddatascience.net/ideas/tutorials/posts/2023/12/12/xmas-cards.html](https://realworlddatascience.net/ideas/tutorials/posts/2023/12/12/xmas-cards.html).
 
+doi: [10.5281/zenodo.10530635](https://doi.org/10.5281/zenodo.10530635)
+
 ## Source code
 
 ### Real World Data Science Quarto Template
